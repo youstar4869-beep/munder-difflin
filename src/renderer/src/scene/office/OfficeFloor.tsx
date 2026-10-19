@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
+import { actionLabel } from '@/i18n/actionLabel';
 import { Application, Container, Graphics, Ticker, Texture } from 'pixi.js';
 // PixiJS uses new Function() internally, blocked by Electron CSP — this patches it.
 import 'pixi.js/unsafe-eval';
@@ -150,7 +152,7 @@ function loadTexture(url: string): Promise<Texture> {
  *  with nothing concrete yet — the bubble renders an animated "…" for that. */
 function liveActivity(agent: Agent, fallback = ''): string {
   const action = (agent.action || '').trim();
-  if (action) return action;
+  if (action) return actionLabel(action, i18n.t.bind(i18n));
   return firstWords(agent.lastPrompt) || fallback;
 }
 
