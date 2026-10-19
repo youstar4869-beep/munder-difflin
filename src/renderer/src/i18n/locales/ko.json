@@ -1528,5 +1528,21 @@
     "reconnecting": "다시 연결하는 중…",
     "archived": "보관됨",
     "using": "{{tool}} 사용 중"
+  },
+  "hivePicker": {
+    "couldNotOpen": "그 폴더를 열지 못했어요.",
+    "createNew": "새 작업 공간 만들기…",
+    "current": "현재",
+    "harnessConfig": "작업 공간",
+    "introBody": "은 앱이 한 작업의 모든 것을 보관하는 폴더예요. 설정, 에이전트와 그 기억, 작업, 트리거, 기록이 여기에 들어가요. 작업 공간마다 따로 분리되어 있어서 여러 구성을 나란히 쓸 수 있어요. 하던 곳을 열거나, 다른 곳으로 바꾸거나, 새로 시작하세요.",
+    "introPrefix": "",
+    "open": "열기",
+    "openExisting": "기존 작업 공간 열기…",
+    "opening": "여는 중…",
+    "openingReload": "{{name}} 여는 중 · 앱이 다시 시작돼요…",
+    "recent": "최근",
+    "switch": "전환 →",
+    "switchTip": "{{path}}(으)로 전환 (앱이 다시 시작돼요)",
+    "title": "작업 공간 선택"
   }
 }
