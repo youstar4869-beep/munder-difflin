@@ -396,6 +396,7 @@
       "memory": "memory",
       "graph": "graph",
       "activity": "activity",
+      "usage": "사용량",
       "skills": "skills",
       "workers": "workers"
     },
@@ -1544,5 +1545,16 @@
     "switch": "전환 →",
     "switchTip": "{{path}}(으)로 전환 (앱이 다시 시작돼요)",
     "title": "작업 공간 선택"
+  },
+  "usageTab": {
+    "loading": "사용량 불러오는 중…",
+    "noHive": "열린 hive가 없어서 보여줄 사용량이 없어요.",
+    "empty": "이번 주에 기록된 사용량이 아직 없어요.",
+    "tokensNote": "캐시 포함 전체 토큰",
+    "updated": "{{time}} 업데이트",
+    "today": "오늘",
+    "week": "이번 주",
+    "byAgent": "직원별",
+    "agent": "직원"
   }
 }

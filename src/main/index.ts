@@ -56,6 +56,7 @@ import { initCompletionWatcher } from './realtimeCompletionWatcher';
 import type { TaskCard, InboxMessage } from './realtimeCompletionWatcher';
 import { TelemetryCollector } from './telemetry';
 import { CostLedgerTotals } from './costLifetime';
+import { UsageHistory } from './usageHistory';
 import { analytics, isRendererMessageSurface } from './analytics';
 import type { SpawnFailReason } from './analytics';
 import { IntegrationBroker } from './integrationBroker';
@@ -3946,6 +3947,23 @@ ipcMain.handle('telemetry:usage', (_evt, agentId: unknown) =>
 ipcMain.handle('telemetry:spans', (_evt, agentId: unknown) =>
   typeof agentId === 'string' ? telemetry.getSpans(agentId) : []);
 ipcMain.handle('telemetry:snapshot', () => telemetry.snapshot());
+
+// ─── IPC: usage history (the Usage tab) ──────────────────────────────────────
+// Read-only fold of cost-ledger.jsonl into today-by-hour / week-by-day buckets,
+// plus each agent's display name from the registry (archived ones included, so
+// past spend keeps its name).
+const usageHistory = new UsageHistory();
+ipcMain.handle('usage:history', async () => {
+  const root = hive.enabled() ? hive.root() : null;
+  if (!root) return null;
+  await usageHistory.refreshFully(join(root, 'cost-ledger.jsonl'));
+  const summary = usageHistory.summarize();
+  const names: Record<string, string> = {};
+  try {
+    for (const [id, a] of Object.entries(hive.registry().agents)) names[id] = a.name;
+  } catch { /* names are optional; ids still render */ }
+  return { ...summary, names };
+});
 
 // ─── IPC: circuit-breaker state (Lane A #6 policy → this lane's avatars/meter) ─
 // Lane A's breaker calls this with a BreakerState; we fan it out to the renderer

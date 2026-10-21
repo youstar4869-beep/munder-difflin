@@ -11,6 +11,7 @@ import { AskMeTab } from './AskMeTab';
 import { TriggersTab } from './triggers/TriggersTab';
 import { TriggerHistoryTab } from './triggers/TriggerHistoryTab';
 import { WorkersTab } from './WorkersTab';
+import { UsageTab } from './UsageTab';
 import { SkillsTab } from './SkillsTab';
 import { acquireTerminal, disposeTerminal, resetTerminal } from './terminalPool';
 import { terminalInstanceKey } from './terminalRecovery';
@@ -47,7 +48,7 @@ import { useRtl } from '@/i18n/useDirection';
 // the old Schedules tab: schedules are now one of four trigger types, and the
 // whole surface lives in ./triggers (see src/shared/triggers.ts for the contract).
 type CCTab = 'terminal' | 'floor' | 'tasks' | 'human' | 'triggers' | 'trigger-history'
-  | 'memory' | 'graph' | 'activity' | 'skills' | 'workers';
+  | 'memory' | 'graph' | 'activity' | 'usage' | 'skills' | 'workers';
 
 /** Fallback denominator for the per-agent token meter when no floor token budget
  *  is configured — so the bar reads as a budget estimate (filled + remaining)
@@ -75,6 +76,7 @@ const TABS: { key: CCTab; labelKey: string; icon: Parameters<typeof Icon>[0]['na
   { key: 'memory', labelKey: 'commandCenter.tabs.memory', icon: 'sparkle' },
   { key: 'graph', labelKey: 'commandCenter.tabs.graph', icon: 'web' },
   { key: 'activity', labelKey: 'commandCenter.tabs.activity', icon: 'bell' },
+  { key: 'usage', labelKey: 'commandCenter.tabs.usage', icon: 'ledger' },
   { key: 'skills', labelKey: 'commandCenter.tabs.skills', icon: 'sparkle' },
   { key: 'workers', labelKey: 'commandCenter.tabs.workers', icon: 'gear' }
 ];
@@ -334,6 +336,7 @@ export function CommandCenterPanel({ agent, fullscreen = false }: { agent: Agent
           />
         )}
         {tab === 'activity' && <ActivityTab />}
+        {tab === 'usage' && <UsageTab />}
         {tab === 'skills' && <SkillsTab agentCwd={agent.cwd} />}
         {tab === 'workers' && <WorkersTab />}
       </div>

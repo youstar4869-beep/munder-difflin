@@ -396,6 +396,7 @@
       "memory": "memory",
       "graph": "graph",
       "activity": "activity",
+      "usage": "usage",
       "skills": "skills",
       "workers": "workers"
     },
@@ -1405,5 +1406,16 @@
     "viewSource": "view source",
     "loading": "loading image…",
     "decodeFailed": "could not decode this image — the file may be corrupt or misnamed"
+  },
+  "usageTab": {
+    "loading": "Loading usage…",
+    "noHive": "No hive is open, so there is no usage to show.",
+    "empty": "No usage recorded this week yet.",
+    "tokensNote": "All tokens, cache included",
+    "updated": "Updated {{time}}",
+    "today": "Today",
+    "week": "This week",
+    "byAgent": "By agent",
+    "agent": "Agent"
   }
 }

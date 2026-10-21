@@ -508,6 +508,22 @@ export type TelemetryEvent =
   | { kind: 'tool_result'; span: ToolSpan }
   | { kind: 'api_error'; agentId: string; sessionId: string; ts: number; error: string };
 
+/** Usage tab: spend in one bucket for one agent. */
+export interface UsageAmount { tokens: number; usd: number }
+/** Usage tab: one chart bar (start time + spend per agent id). */
+export interface UsageBucket { start: number; byAgent: Record<string, UsageAmount> }
+/** Usage tab payload (`usage:history`), folded read-only from cost-ledger.jsonl. */
+export interface UsageHistory {
+  now: number;
+  /** 24 hourly buckets, today 0:00 → 23:00 local. */
+  today: UsageBucket[];
+  /** 7 daily buckets, this week Monday → Sunday local. */
+  week: UsageBucket[];
+  agents: string[];
+  names: Record<string, string>;
+  ready: boolean;
+}
+
 /** Cold-start backfill from the collector. */
 export interface TelemetrySnapshot {
   usage: AgentUsageSample[];
@@ -1024,6 +1040,9 @@ const api = {
   /** Cold-start backfill of all agents' usage + recent spans. */
   telemetrySnapshot: (): Promise<TelemetrySnapshot> =>
     ipcRenderer.invoke('telemetry:snapshot'),
+  /** Usage tab: today-by-hour and this-week-by-day spend per agent. */
+  usageHistory: (): Promise<UsageHistory | null> =>
+    ipcRenderer.invoke('usage:history'),
   /** Subscribe to live telemetry pushes; returns an unsubscribe fn. */
   onTelemetryEvent: (cb: (e: TelemetryEvent) => void): (() => void) => {
     const listener = (_e: IpcRendererEvent, payload: TelemetryEvent) => cb(payload);

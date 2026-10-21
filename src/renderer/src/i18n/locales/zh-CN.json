@@ -396,6 +396,7 @@
       "memory": "记忆",
       "graph": "图谱",
       "activity": "动态",
+      "usage": "用量",
       "skills": "技能",
       "workers": "工人"
     },
@@ -1405,5 +1406,16 @@
     "viewSource": "查看源码",
     "loading": "正在加载图片…",
     "decodeFailed": "无法解码此图片——文件可能已损坏或扩展名有误"
+  },
+  "usageTab": {
+    "loading": "正在加载用量…",
+    "noHive": "没有打开的 hive，暂无用量可显示。",
+    "empty": "本周还没有用量记录。",
+    "tokensNote": "全部 token（含缓存）",
+    "updated": "{{time}} 更新",
+    "today": "今天",
+    "week": "本周",
+    "byAgent": "按员工",
+    "agent": "员工"
   }
 }
